@@ -5,22 +5,9 @@ export let MENU_ITEM = [
         icon: 'dashboard'
     },
     {
+        path: 'profile',
         title: 'Pet Profile',
-        icon: 'user',
-        children: [
-            {
-                path: 'profile',
-                title: 'Profile'
-            },
-            {
-                path: 'profile',
-                title: 'Smart Feeding Settings'
-            },
-            {
-                path: 'profile',
-                title: 'Stock Settings'
-            }
-        ]
+        icon: 'user'
     },
     {
         path: 'index',
