@@ -1,9 +1,6 @@
-<div class="row">
-  <div class="col-md-4">
-    <profile></profile>
-  </div>
-  <div class="col-md-8">
-    <div class="row card card-block">
+<div class="row">  
+  <div class="col-md-12">    
+    <card cardTitle="Edit Profile" isCollapse="true">
       <div class="col-md-6 form-group">
         <label class="control-label">Pet name</label>
         <input type="text" class="form-control" placeholder="Pet name">
@@ -25,8 +22,32 @@
         <input type="text" class="form-control" placeholder="Gender">
       </div>      
       <div class="col-md-12">
-        <button class="btn btn-primary">Update Profile</button>
+        <button class="btn btn-primary" (click)="updateProfile()">Update Profile</button>
       </div>
-    </div>
+    </card>
+  </div>
+  <div class="col-md-12">
+      <card cardTitle="Edit Stock" isCollapse="true">
+        <form class="form-inline">
+          <label class="control-label" class="form-label">Amount</label>
+          <input type="text" class="form-control" placeholder="Amount (g)">        
+          <button class="btn btn-primary" (click)="updateStock()">Update Stock</button>
+      </form>
+    </card>
+  </div>
+  <div class="col-md-12">
+      <card cardTitle="Smart feeding Settings" isCollapse="true">
+      <div class="col-md-6 form-group">
+        <label class="control-label">Amount</label>
+        <input type="text" class="form-control" placeholder="Amount (g)">
+      </div>      
+      <div class="col-md-6 form-group">
+        <label class="control-label">Meal per day</label>
+        <input type="text" class="form-control" placeholder="Meal per day">
+      </div>      
+      <div class="col-md-12">
+        <button class="btn btn-primary" (click)="updateSettings()">Update Settings</button>
+      </div>
+    </card>
   </div>
 </div>
