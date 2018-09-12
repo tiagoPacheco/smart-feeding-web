@@ -1,5 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
-import { IndexComponent } from './index.component';
+import { IndexComponent } from './components/index.component';
 
 const childRoutes: Routes = [
     {

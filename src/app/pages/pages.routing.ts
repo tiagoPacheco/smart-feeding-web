@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { PagesComponent } from './pages.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './login/components/login.component';
 
 export const childRoutes: Routes = [
     {

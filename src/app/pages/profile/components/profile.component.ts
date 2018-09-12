@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NotificationModel } from '../../shared/models/notification-model';
-import { GlobalService } from '../../shared/services/global.service';
+import { NotificationModel } from '../../../shared/models/notification-model';
+import { GlobalService } from '../../../shared/services/global.service';
 
 @Component({
   selector: 'app-profile',

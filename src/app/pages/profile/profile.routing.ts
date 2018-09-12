@@ -1,5 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
-import { ProfileComponent } from './profile.component';
+import { ProfileComponent } from './components/profile.component';
 
 const childRoutes: Routes = [
     {
