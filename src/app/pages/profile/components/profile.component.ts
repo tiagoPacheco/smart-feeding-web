@@ -28,11 +28,10 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  submit(){    
-    // this._profileService.save({ "name": "amanda", "password": "987"});
+  submit(){       
 
     this._profileService.save({
-      name: this.profileForm.value.username,
+      name: this.profileForm.value.name,
       password: this.profileForm.value.password
     }).subscribe(
       data => {          

@@ -1,33 +1,32 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs/observable/of';
 import { map, catchError } from 'rxjs/operators';
+
+import { GlobalService } from '../../shared/services/global.service';
 @Injectable()
 export class ProfileService {
 
   httpOptions = { };
-
-  constructor(private httpClient: HttpClient) { }  
+  constructor(private httpClient: HttpClient, private globalService: GlobalService) {       
+  }  
     
-  save(formData: any): Observable<any> {
-    console.log(formData);
+  save(formData: any): Observable<any> {           
     return this.httpClient
-      .post("localhost:3001/users", { "name": "amanda", "password": "987"}, {})
+      .post(`${this.globalService.url}/users/`, formData, {})
       .pipe(
-        map((data: any) => data),
-        catchError(() => of('Server Error'))
+        map((data: any) => data.json()),
+        catchError((data) => data)
       )
   }
 
-  // getData(): Observable<any> {  
-  //   this.httpOptions = this.authenticationService.getHttpOptions();
-
-  //   return this.httpClient
-  //     .get(`${environment.serverUrl}/candidate/all/`, this.httpOptions)
-  //     .pipe(
-  //       map((data: any) => data),
-  //       catchError(() => of('Server Error'))
-  //     )
-  // }
+  getAllUsers(): Observable<any>{
+    return this.httpClient
+      .get(`${this.globalService.url}/users/`, this.httpOptions)
+      .pipe(
+        map((data: any) => data),
+        catchError((data) => data)
+    )
+  }
 }
