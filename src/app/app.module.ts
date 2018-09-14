@@ -6,6 +6,7 @@ import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { ProfileService } from './pages/profile/profile.service';
 
 
 @NgModule({
@@ -20,6 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   declarations: [
     AppComponent,
+  ],
+  providers: [
+    ProfileService
   ],
   bootstrap: [AppComponent]
 })

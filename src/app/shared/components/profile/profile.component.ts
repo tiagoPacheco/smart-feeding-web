@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalService } from '../../services/global.service'
 
 @Component({
   selector: 'profile',
@@ -10,7 +11,10 @@ export class ProfileComponent implements OnInit {
   userName: string = 'Ralf';
   breed: string = 'Husky';
   
-  constructor() { }
+  constructor(public _globalService: GlobalService) {
+    this.userName = _globalService.name;
+    this.breed = _globalService.breed;
+  }
 
   ngOnInit() {
   }

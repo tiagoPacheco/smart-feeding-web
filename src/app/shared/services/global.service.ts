@@ -7,7 +7,12 @@ import { NotificationModel } from '../models/notification-model'; */
 
 @Injectable()
 export class GlobalService {
-    url = 'http://localhost:3001'    
+    url = 'http://localhost:3001';
+    userId = '5b987d7a9bad0c346cdc0d0d';
+    petId = '';
+    thingId = '';
+    name = '';
+    breed = '';
 
     private dataSource = new Subject<DataSourceClass>();
 

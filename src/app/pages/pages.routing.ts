@@ -4,7 +4,7 @@ import { LoginComponent } from './login/components/login.component';
 
 export const childRoutes: Routes = [
     {
-        path: 'login',
+        path: '',
         component: LoginComponent,
     },
     {

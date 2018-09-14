@@ -8,10 +8,5 @@ export let MENU_ITEM = [
         path: 'profile',
         title: 'Pet Profile',
         icon: 'user'
-    },
-    {
-        path: 'index',
-        title: 'Device',
-        icon: 'cogs'
     }
 ];

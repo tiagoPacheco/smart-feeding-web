@@ -1,49 +1,44 @@
 <div class="row">
   <div class="col-md-12">
-    <form (ngSubmit)="submit()" [formGroup]="profileForm">
+    <form [formGroup]="profileForm">
       <card cardTitle="Edit Profile" isCollapse="true">
         <div class="col-md-6 form-group">
           <label class="control-label">Pet name</label>
-          <input type="text" 
-          class="form-control"
-          placeholder="Pet name"
-          formControlName="name">
+          <input type="text" class="form-control" placeholder="Pet name" formControlName="name" [value]="profileForm.value.name">
         </div>
         <div class="col-md-6 form-group">
           <label class="control-label">Weight</label>
-          <input type="text" 
-            class="form-control" 
-            placeholder="Weight"
-            formControlName="password">
-        </div>        
+          <input type="number" class="form-control" placeholder="Weight" formControlName="weight" [value]="weight">
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="control-label">Breed</label>
+          <input type="text" class="form-control" placeholder="breed" formControlName="breed" [value]="breed">
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="control-label">Birth Date</label>
+          <input type="date" class="form-control" formControlName="birthDate" [value]="birthDate">
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="control-label">Gender</label>
+          <input type="text" class="form-control" placeholder="M/F" formControlName="gender" [value]="gender">
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="control-label">Amount of food your pet eat</label>
+          <input type="number" class="form-control" placeholder="200 g" formControlName="amountFoodPetEat" [value]="amountFoodPetEat">
+        </div>
         <div class="col-md-12">
-          <button type="submit" class="btn btn-primary">Update Profile</button>
+          <button (click)="updateProfile()" class="btn btn-primary">Update Profile</button>
         </div>
       </card>
     </form>
   </div>
   <div class="col-md-12">
     <card cardTitle="Edit Stock" isCollapse="true">
-      <form class="form-inline">
+      <form class="form-inline" [formGroup]="thingForm">
         <label class="control-label" class="form-label">Amount</label>
-        <input type="text" class="form-control" placeholder="Amount (g)">
+        <input type="number" class="form-control" placeholder="Amount (g)" formControlName="amountFood" [value]="amountFood">
         <button class="btn btn-primary" (click)="updateStock()">Update Stock</button>
       </form>
-    </card>
-  </div>
-  <div class="col-md-12">
-    <card cardTitle="Smart feeding Settings" isCollapse="true">
-      <div class="col-md-6 form-group">
-        <label class="control-label">Amount</label>
-        <input type="text" class="form-control" placeholder="Amount (g)">
-      </div>
-      <div class="col-md-6 form-group">
-        <label class="control-label">Meal per day</label>
-        <input type="text" class="form-control" placeholder="Meal per day">
-      </div>
-      <div class="col-md-12">
-        <button class="btn btn-primary" (click)="updateSettings()">Update Settings</button>
-      </div>
     </card>
   </div>
 </div>
