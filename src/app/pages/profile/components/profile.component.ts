@@ -81,7 +81,8 @@ export class ProfileComponent implements OnInit {
         data => {data});
     }
     else{
-      this._profileService.createProfile({userId: this._globalService.userId, ...this.profileForm.value});
+      this._profileService.createProfile({userId: this._globalService.userId, ...this.profileForm.value}).subscribe(
+        data => {data});
     }    
 
     this.alertMessage({ type: 'default', title: 'Updated!', value: 'The profile was updated' });
@@ -89,11 +90,11 @@ export class ProfileComponent implements OnInit {
 
   updateStock(){
 
-    if(this.existProfile){      
+    if(this.existStock){      
       this._profileService.updateStock({userId: this._globalService.userId, ...this.thingForm.value}).subscribe(data => {data});
     }
     else{
-      this._profileService.createStock({userId: this._globalService.userId, ...this.profileForm.value}).subscribe(data => {data});      
+      this._profileService.createStock({userId: this._globalService.userId, ...this.thingForm.value}).subscribe(data => {data});      
     }    
 
     this.alertMessage({ type: 'default', title: 'Updated!', value: 'The stock was updated' });
