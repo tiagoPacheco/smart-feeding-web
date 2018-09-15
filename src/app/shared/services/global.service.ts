@@ -8,7 +8,7 @@ import { NotificationModel } from '../models/notification-model'; */
 @Injectable()
 export class GlobalService {
     url = 'http://localhost:3001';
-    userId = '5b987d7a9bad0c346cdc0d0d';
+    userId = '5b9c67c55916d92a80078bf2';
     petId = '';
     thingId = '';
     name = '';

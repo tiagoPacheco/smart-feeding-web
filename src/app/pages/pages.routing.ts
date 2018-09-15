@@ -6,6 +6,9 @@ export const childRoutes: Routes = [
     {
         path: '',
         component: LoginComponent,
+        children: [
+            { path: 'login', loadChildren: './login/login.module#LoginModule' }
+        ]
     },
     {
         path: 'pages',
