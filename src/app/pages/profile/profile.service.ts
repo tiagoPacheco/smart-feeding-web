@@ -12,57 +12,38 @@ export class ProfileService {
   constructor(private httpClient: HttpClient, private globalService: GlobalService) {       
   }  
     
-  createProfile(formData: any): Observable<any> {           
-    return this.httpClient
-      .post(`${this.globalService.url}/pet/`, formData, {})
-      .pipe(
-        map((data: any) => data.json()),
-        catchError((data) => data)
-      )
+  createProfile(formData: any) {           
+    this.httpClient
+      .post(`${this.globalService.url}/pet/`, formData, {}).subscribe()
   }
 
-  updateProfile(formData: any): Observable<any> {         
-    return this.httpClient
+  updateProfile(formData: any) {         
+    this.httpClient
       .put(`${this.globalService.url}/pet/update/${this.globalService.petId}`, formData, {})
-      .pipe(
-        map((data: any) => data.json()),
-        catchError((data) => data)
-      )
+      .subscribe();
   }
 
-  getPetProfile(): Observable<any>{
+  getPetProfile() {
     return this.httpClient
-      .get(`${this.globalService.url}/pet/${this.globalService.userId}`, this.httpOptions)
-      .pipe(
-        map((data: any) => data),
-        catchError((data) => data)
-    )
+      .get(`${this.globalService.url}/pet/${this.globalService.userId}`, this.httpOptions);
   }
 
-  createStock(formData: any): Observable<any> {   
+  createStock(formData: any) {   
+    console.log('Create stock')
     return this.httpClient
       .post(`${this.globalService.url}/thing/`, formData, {})
-      .pipe(
-        map((data: any) => data.json()),
-        catchError((data) => data)
-      )
+      .subscribe(data => { 
+        this.globalService.thingId = data["id"];
+      });
   }
 
-  updateStock(formData: any): Observable<any> {   
+  updateStock(formData: any) {   
     return this.httpClient
-      .put(`${this.globalService.url}/thing/update/${this.globalService.thingId}`, formData, {})
-      .pipe(
-        map((data: any) => data.json()),
-        catchError((data) => data)
-      )
+      .put(`${this.globalService.url}/thing/update/${this.globalService.thingId}`, formData, {}).subscribe();
   }
 
-  getThingData(): Observable<any>{
+  getThingData() {
     return this.httpClient
-      .get(`${this.globalService.url}/thing/${this.globalService.userId}`, this.httpOptions)
-      .pipe(
-        map((data: any) => data),
-        catchError((data) => data)
-    )
+      .get(`${this.globalService.url}/thing/${this.globalService.userId}`, this.httpOptions);
   }
 }

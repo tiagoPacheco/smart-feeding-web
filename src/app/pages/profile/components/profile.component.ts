@@ -13,10 +13,11 @@ export class ProfileComponent implements OnInit {
 
   constructor(public _globalService: GlobalService, 
     private  _profileService: ProfileService,
-    private formBuilder: FormBuilder) {            
+    private formBuilder: FormBuilder) {      
+      
       this._profileService.getPetProfile().subscribe(
         data => {     
-          if(data.length > 0){
+          if (data[0]) {
             this.existProfile = true;
             this._globalService.petId = data[0]._id;
             this.name = data[0].name;
@@ -32,7 +33,7 @@ export class ProfileComponent implements OnInit {
 
       this._profileService.getThingData().subscribe(
         data => {     
-          if(data.length > 0){
+          if (data[0]) {
             this.existStock = true;
             this._globalService.thingId = data[0]._id;
             this.amountFood = data[0].amountFood;
@@ -77,12 +78,11 @@ export class ProfileComponent implements OnInit {
     this._globalService.breed = this.breed;
     
     if(this.existProfile){
-      this._profileService.updateProfile({userId: this._globalService.userId, ...this.profileForm.value}).subscribe(
-        data => {data});
+      this._profileService.updateProfile({userId: this._globalService.userId, ...this.profileForm.value});
+      this.existProfile = true
     }
     else{
-      this._profileService.createProfile({userId: this._globalService.userId, ...this.profileForm.value}).subscribe(
-        data => {data});
+      this._profileService.createProfile({userId: this._globalService.userId, ...this.profileForm.value});
     }    
 
     this.alertMessage({ type: 'default', title: 'Updated!', value: 'The profile was updated' });
@@ -91,10 +91,11 @@ export class ProfileComponent implements OnInit {
   updateStock(){
 
     if(this.existStock){      
-      this._profileService.updateStock({userId: this._globalService.userId, ...this.thingForm.value}).subscribe(data => {data});
+      this._profileService.updateStock({userId: this._globalService.userId, ...this.thingForm.value});      
     }
     else{
-      this._profileService.createStock({userId: this._globalService.userId, ...this.thingForm.value}).subscribe(data => {data});      
+      this._profileService.createStock({userId: this._globalService.userId, ...this.thingForm.value});
+      this.existStock = true  
     }    
 
     this.alertMessage({ type: 'default', title: 'Updated!', value: 'The stock was updated' });

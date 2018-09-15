@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { GlobalService } from '../../services/global.service';
+import { ProfileService } from '../../../pages/profile/profile.service';
 
 @Component({
   selector: 'pages-top',
@@ -8,16 +9,32 @@ import { GlobalService } from '../../services/global.service';
 })
 export class PagesTopComponent {
   avatarImgSrc: string = 'assets/images/dog-profile.jpg';
-  userName: string = 'Ralf';
-  breed: string = 'Husky';
+  userName: string = 'Dog name';
+  breed: string = '123';
 
 
   sidebarToggle: boolean = true;
   tip = { ring: true, email: true };
 
-  constructor(private _globalService: GlobalService) { 
-    this.userName = _globalService.name;
-    this.breed = _globalService.breed;
+  constructor(private _profileService: ProfileService,
+    private _globalService: GlobalService) {
+    this._profileService.getPetProfile().subscribe(
+      data => {
+        if (data[0]) {
+          this._globalService.petId = data[0]._id;
+          // this._globalService.userId = data[0].userId;
+          this._globalService.name = data[0].name;
+          this._globalService.breed = data[0].breed;
+          this.userName = _globalService.name;
+          this.breed = _globalService.breed;
+        }
+      }
+    );
+
+    const savedCredentials = localStorage.getItem("userId");
+    if (savedCredentials) {
+      this._globalService.userId = savedCredentials;
+    }
   }
 
   public _sidebarToggle() {
