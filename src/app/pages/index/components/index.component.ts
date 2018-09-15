@@ -36,7 +36,9 @@ export class IndexComponent implements OnInit {
   }
 
   checkHowManyDaysMealsLeft(){
-
+    this._globalService.getPetCount().subscribe(data => {
+      this.alertMessage({ type: 'default', title: 'Pet ate update', value: `Pet ate ${data["result"]} times`});
+    })
   }
 
   feedPet() {

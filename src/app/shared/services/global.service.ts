@@ -36,6 +36,11 @@ export class GlobalService {
             .subscribe(null)
     }
 
+    getPetCount() {
+        return this.httpClient
+            .get(`${this.url}/device-data/`, {})
+    }
+
     getUser(name, password) {
         return this.httpClient
             .get(`${this.url}/users/get/${name}`, {});
