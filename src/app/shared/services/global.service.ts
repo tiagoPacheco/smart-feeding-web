@@ -33,9 +33,7 @@ export class GlobalService {
     feedPet() {
         this.httpClient
             .post(`${this.url}/thing/feed_pet`, null, {})
-            .subscribe(data => {
-                console.log(`the data: ${data["name"]}`)
-            })
+            .subscribe(null)
     }
 
     getUser(name, password) {
