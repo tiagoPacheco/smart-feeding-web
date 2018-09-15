@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { map, catchError } from 'rxjs/operators';
 /* models */
 /* import { TabMenuModel } from '../models/tabs-model';
 import { NotificationModel } from '../models/notification-model'; */
@@ -14,6 +15,9 @@ export class GlobalService {
     name = '';
     breed = '';
 
+    constructor(private httpClient: HttpClient) {
+    }
+
     private dataSource = new Subject<DataSourceClass>();
 
     data$ = this.dataSource.asObservable();
@@ -22,6 +26,14 @@ export class GlobalService {
         this.dataSource.next({
             ev: ev,
             value: value
+        })
+    }
+
+    feedPet() {
+      this.httpClient
+        .post(`${this.url}/thing/feed_pet`, null, {})
+        .subscribe(data => {
+            console.log(`the data: ${data["name"]}`)
         })
     }
 }

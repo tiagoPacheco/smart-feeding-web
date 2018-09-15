@@ -13,24 +13,24 @@ export class IndexComponent implements OnInit {
 
   public AnimationBarOption;
 
-  constructor(public _globalService: GlobalService, 
+  constructor(public _globalService: GlobalService,
     private  _indexService: IndexService
   ) { }
 
   ngOnInit() {
-    
+
   }
 
-  checkHowManyMealsLeft(){   
+  checkHowManyMealsLeft(){
 
     this._indexService.getThingData().subscribe(
-      data => {     
+      data => {
         if(data.length < 1){
           this.alertMessage({ type: 'default', title: 'Check the pet profile!', value: 'It seems you have not updated your pet\'s data yet. Go to \'Pet Profile\' and update.'});
         }
         else{
           this.alertMessage({ type: 'default', title: 'Meals that remain...', value: `There are still ${data[0].amountFood} grams left in the pet's bowl.`});
-        }      
+        }
       }
     );
   }
@@ -39,7 +39,11 @@ export class IndexComponent implements OnInit {
 
   }
 
-  alertMessage(data: NotificationModel) {      
+  feedPet() {
+    this._globalService.feedPet()
+  }
+
+  alertMessage(data: NotificationModel) {
     this._globalService.dataBusChanged('notification', data);
   }
 }
