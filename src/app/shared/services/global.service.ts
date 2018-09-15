@@ -10,10 +10,10 @@ import { NotificationModel } from '../models/notification-model'; */
 export class GlobalService {
     url = 'http://localhost:3001';
     userId = localStorage.getItem("userId");
+    password = localStorage.getItem("password");
     petId = '';
     thingId = '';
-    name = '';
-    password = ''
+    name = '';    
     breed = '';
 
     constructor(private httpClient: HttpClient) {

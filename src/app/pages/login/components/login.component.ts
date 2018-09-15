@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
           this.globalService.userId = id;
           this.globalService.password = password;
           localStorage.setItem("userId", id);
-          
+          localStorage.setItem("password", f.value.password);
           this.router.navigate(['/admin/dashboard'])
         }
         else {
@@ -32,6 +32,8 @@ export class LoginComponent implements OnInit {
             .subscribe(dataUser => {
               this.globalService.userId = dataUser["id"];
               this.globalService.password = f.value.password;
+              localStorage.setItem("userId", id);
+              localStorage.setItem("password", f.value.password);
               this.router.navigate(['/admin/dashboard'])
             })
         }
