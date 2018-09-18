@@ -9,7 +9,11 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private globalService: GlobalService, private router: Router) { }
+  constructor(private globalService: GlobalService, private router: Router) {
+    localStorage.removeItem("userId");
+    localStorage.removeItem("password");
+    localStorage.removeItem("username");
+  }
 
   ngOnInit() {
   }
@@ -23,13 +27,15 @@ export class LoginComponent implements OnInit {
         if (id) {
           localStorage.setItem("userId", id);
           localStorage.setItem("password", f.value.password);
+          localStorage.setItem("username", f.value.username);
           this.router.navigate(['/admin/dashboard'])
         }
         else {
-          this.globalService.createUser(f.value.username, f.value.password)
+          this.globalService.createUser({ name: f.value.username, password: f.value.password })
             .subscribe(dataUser => {
-              localStorage.setItem("userId", id);
+              localStorage.setItem("userId", dataUser["id"]);
               localStorage.setItem("password", f.value.password);
+              localStorage.setItem("username", f.value.username);
               this.router.navigate(['/admin/dashboard'])
             })
         }

@@ -8,16 +8,11 @@ import { GlobalService } from '../../shared/services/global.service';
 @Injectable()
 export class IndexService {
 
-  httpOptions = { };
-  constructor(private _httpClient: HttpClient, private _globalService: GlobalService) {       
-  } 
-    
-  getThingData(): Observable<any>{
+  constructor(private _httpClient: HttpClient, private _globalService: GlobalService) {
+  }
+
+  getThingData(): Observable<any> {    
     return this._httpClient
-      .get(`${this._globalService.url}/thing/${this._globalService.userId}`, this.httpOptions)
-      .pipe(
-        map((data: any) => data),
-        catchError((data) => data)
-    )
+      .get(`${this._globalService.url}/thing/${this._globalService.userId}`, this._globalService.httpOptions);
   }
 }

@@ -11,12 +11,19 @@ export class GlobalService {
     url = 'http://localhost:3001';
     userId = localStorage.getItem("userId");
     password = localStorage.getItem("password");
+    username = localStorage.getItem("username");
+    name = '';
     petId = '';
-    thingId = '';
-    name = '';    
+    thingId = '';    
     breed = '';
 
+    httpOptions = {};
+
     constructor(private httpClient: HttpClient) {
+        let headers = new HttpHeaders();
+        headers = headers.append("Authorization", "Basic " + btoa(`${this.username}:${this.password}`));
+        headers = headers.append("Content-Type", "application/json");
+        this.httpOptions = { headers: headers, withCredentials: true };
     }
 
     private dataSource = new Subject<DataSourceClass>();
@@ -32,13 +39,13 @@ export class GlobalService {
 
     feedPet() {
         this.httpClient
-            .post(`${this.url}/thing/feed_pet`, null, {})
+            .post(`${this.url}/thing/feed_pet`, null, this.httpOptions)
             .subscribe(null)
     }
 
     getPetCount() {
         return this.httpClient
-            .get(`${this.url}/device-data/`, {})
+            .get(`${this.url}/device-data/`, this.httpOptions)
     }
 
     getUser(name, password) {
@@ -48,12 +55,12 @@ export class GlobalService {
 
     getAmmountOfFood() {
         return this.httpClient
-            .get(`${this.url}/food`, {});
+            .get(`${this.url}/food`, this.httpOptions);
     }
-
-    createUser(name, password) {
+    
+    createUser(formData) {
         return this.httpClient
-            .post(`${this.url}/users/`, { name: name, password: password }, {});
+            .post(`${this.url}/users/`, formData, {});
     }
 }
 
