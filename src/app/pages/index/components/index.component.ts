@@ -17,25 +17,26 @@ export class IndexComponent implements OnInit {
     private  _indexService: IndexService
   ) { }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   checkHowManyMealsLeft(){
 
-    this._indexService.getThingData().subscribe(
-      data => {
-        if(data.length < 1){
-          this.alertMessage({ type: 'default', title: 'Check the pet profile!', value: 'It seems you have not updated your pet\'s data yet. Go to \'Pet Profile\' and update.'});
-        }
-        else{
-          this.alertMessage({ type: 'default', title: 'Meals that remain...', value: `There are still ${data[0].amountFood} grams left in the pet's bowl.`});
-        }
-      }
-    );
+    // this._indexService.getThingData().subscribe(
+    //   data => {
+    //     if(data.length < 1){
+    //       this.alertMessage({ type: 'default', title: 'Check the pet profile!', value: 'It seems you have not updated your pet\'s data yet. Go to \'Pet Profile\' and update.'});
+    //     }
+    //     else{
+    //       this.alertMessage({ type: 'default', title: 'Meals that remain...', value: `There are still ${data[0].amountFood} grams left in the pet's bowl.`});
+    //     }
+    //   }
+    // );
+    this._globalService.getAmmountOfFood().subscribe(data => {
+      this.alertMessage({ type: 'default', title: 'Meals remaining', value: `${data["result"]} meals`});
+    })
   }
 
-  checkHowManyDaysMealsLeft(){
+  checkPetAte(){
     this._globalService.getPetCount().subscribe(data => {
       this.alertMessage({ type: 'default', title: 'Pet ate update', value: `Pet ate ${data["result"]} times`});
     })

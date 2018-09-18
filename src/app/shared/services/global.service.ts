@@ -46,6 +46,11 @@ export class GlobalService {
             .get(`${this.url}/users/get/${name}`, {});
     }
 
+    getAmmountOfFood() {
+        return this.httpClient
+            .get(`${this.url}/food`, {});
+    }
+
     createUser(name, password) {
         return this.httpClient
             .post(`${this.url}/users/`, { name: name, password: password }, {});
