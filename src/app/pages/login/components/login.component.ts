@@ -28,10 +28,7 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem("userId", id);
           sessionStorage.setItem("password", f.value.password);
           sessionStorage.setItem("username", f.value.username);
-          this.globalService.defaultUserId = id;
-          this.globalService.defaultPassword = f.value.password;
-          this.globalService.dafaultUsername = f.value.username;
-          this.router.navigate(['/admin/dashboard'])
+          this.router.navigate(['/pages/index'])
         }
         else {
           this.globalService.createUser({ name: f.value.username, password: f.value.password })
@@ -39,13 +36,10 @@ export class LoginComponent implements OnInit {
               sessionStorage.setItem("userId", dataUser["id"]);
               sessionStorage.setItem("password", f.value.password);
               sessionStorage.setItem("username", f.value.username);
-              this.globalService.defaultUserId = dataUser["id"];
-              this.globalService.defaultPassword = f.value.password;
-              this.globalService.dafaultUsername = f.value.username;
-              this.router.navigate(['/admin/dashboard'])
+              this.router.navigate(['/pages/index'])
             })
         }
-      })
+      });
   }
 
 }

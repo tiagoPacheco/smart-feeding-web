@@ -15,7 +15,8 @@ export class IndexComponent implements OnInit {
 
   constructor(public _globalService: GlobalService,
     private  _indexService: IndexService
-  ) { }
+  ) {
+   }
 
   ngOnInit() {}
 

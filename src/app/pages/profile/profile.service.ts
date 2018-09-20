@@ -8,40 +8,47 @@ import { GlobalService } from '../../shared/services/global.service';
 @Injectable()
 export class ProfileService {
 
-  constructor(private httpClient: HttpClient, private globalService: GlobalService) {    
+  constructor(private httpClient: HttpClient, private globalService: GlobalService) {
   }
 
   createProfile(formData: any) {
+    var httpOptions = this.globalService.getHttpOptions(sessionStorage.getItem("username"), sessionStorage.getItem("password"));
     this.httpClient
-      .post(`${this.globalService.url}/pet/`, formData, this.globalService.httpOptions).subscribe()
+      .post(`${this.globalService.url}/pet/`, formData, httpOptions).subscribe()
   }
 
   updateProfile(formData: any) {
+    var httpOptions = this.globalService.getHttpOptions(sessionStorage.getItem("username"), sessionStorage.getItem("password"));
     this.httpClient
-      .put(`${this.globalService.url}/pet/update/${this.globalService.petId}`, formData, this.globalService.httpOptions)
+      .put(`${this.globalService.url}/pet/update/${this.globalService.petId}`, formData, httpOptions)
       .subscribe();
   }
 
   getPetProfile() {
+    var httpOptions = this.globalService.getHttpOptions(sessionStorage.getItem("username"), sessionStorage.getItem("password"));
+
     return this.httpClient
-      .get(`${this.globalService.url}/pet/${this.globalService.userId}`, this.globalService.httpOptions);
+      .get(`${this.globalService.url}/pet/${sessionStorage.getItem("userId")}`, httpOptions);
   }
 
   createStock(formData: any) {
+    var httpOptions = this.globalService.getHttpOptions(sessionStorage.getItem("username"), sessionStorage.getItem("password"));
     return this.httpClient
-      .post(`${this.globalService.url}/thing/`, formData, this.globalService.httpOptions)
+      .post(`${this.globalService.url}/thing/`, formData, httpOptions)
       .subscribe(data => {
         this.globalService.thingId = data["id"];
       });
   }
 
   updateStock(formData: any) {
+    var httpOptions = this.globalService.getHttpOptions(sessionStorage.getItem("username"), sessionStorage.getItem("password"));
     return this.httpClient
-      .put(`${this.globalService.url}/thing/update/${this.globalService.thingId}`, formData, this.globalService.httpOptions).subscribe();
+      .put(`${this.globalService.url}/thing/update/${this.globalService.thingId}`, formData, httpOptions).subscribe();
   }
 
   getThingData() {
+    var httpOptions = this.globalService.getHttpOptions(sessionStorage.getItem("username"), sessionStorage.getItem("password"));
     return this.httpClient
-      .get(`${this.globalService.url}/thing/${this.globalService.userId}`, this.globalService.httpOptions);
+      .get(`${this.globalService.url}/thing/${sessionStorage.getItem("userId")}`, httpOptions);
   }
 }

@@ -9,23 +9,21 @@ import { NotificationModel } from '../models/notification-model'; */
 @Injectable()
 export class GlobalService {
     url = 'http://localhost:3001';
-    defaultUserId = ''
-    defaultPassword = ''
-    dafaultUsername = ''
-    userId = sessionStorage.getItem("userId") ? sessionStorage.getItem("userId") : this.defaultUserId;
-    password = sessionStorage.getItem("password") ? sessionStorage.getItem("password") : this.defaultPassword;
-    username = sessionStorage.getItem("username") ? sessionStorage.getItem("username") : this.dafaultUsername;
     name = '';
     petId = '';
-    thingId = '';    
+    thingId = '';
     breed = '';
     httpOptions = {};
 
     constructor(private httpClient: HttpClient) {
+
+    }
+
+    getHttpOptions(username, password) {
         let headers = new HttpHeaders();
-        headers = headers.append("Authorization", "Basic " + btoa(`${this.username}:${this.password}`));
+        headers = headers.append("Authorization", "Basic " + btoa(`${username}:${password}`));
         headers = headers.append("Content-Type", "application/json");
-        this.httpOptions = { headers: headers, withCredentials: true };
+        return this.httpOptions = { headers: headers, withCredentials: true };
     }
 
     private dataSource = new Subject<DataSourceClass>();
@@ -40,14 +38,18 @@ export class GlobalService {
     }
 
     feedPet() {
+        console.log(sessionStorage.getItem("username"));
+
+        var httpOptions = this.getHttpOptions(sessionStorage.getItem("username"), sessionStorage.getItem("password"));
         this.httpClient
-            .post(`${this.url}/thing/feed_pet`, null, this.httpOptions)
+            .post(`${this.url}/thing/feed_pet`, null, httpOptions)
             .subscribe(null)
     }
 
     getPetCount() {
+        var httpOptions = this.getHttpOptions(sessionStorage.getItem("username"), sessionStorage.getItem("password"));
         return this.httpClient
-            .get(`${this.url}/device-data/`, this.httpOptions)
+            .get(`${this.url}/device-data/`, httpOptions)
     }
 
     getUser(name, password) {
@@ -56,10 +58,11 @@ export class GlobalService {
     }
 
     getAmmountOfFood() {
+        var httpOptions = this.getHttpOptions(sessionStorage.getItem("username"), sessionStorage.getItem("password"));
         return this.httpClient
-            .get(`${this.url}/food`, this.httpOptions);
+            .get(`${this.url}/food`, httpOptions);
     }
-    
+
     createUser(formData) {
         return this.httpClient
             .post(`${this.url}/users/`, formData, {});

@@ -78,11 +78,11 @@ export class ProfileComponent implements OnInit {
     this._globalService.breed = this.breed;
     
     if(this.existProfile){
-      this._profileService.updateProfile({userId: this._globalService.userId, ...this.profileForm.value});
+      this._profileService.updateProfile({userId: sessionStorage.getItem("userId"), ...this.profileForm.value});
       this.existProfile = true
     }
     else{
-      this._profileService.createProfile({userId: this._globalService.userId, ...this.profileForm.value});
+      this._profileService.createProfile({userId: sessionStorage.getItem("userId"), ...this.profileForm.value});
     }    
 
     this.alertMessage({ type: 'default', title: 'Updated!', value: 'The profile was updated' });
@@ -91,10 +91,10 @@ export class ProfileComponent implements OnInit {
   updateStock(){
 
     if(this.existStock){      
-      this._profileService.updateStock({userId: this._globalService.userId, ...this.thingForm.value});      
+      this._profileService.updateStock({userId: sessionStorage.getItem("userId"), ...this.thingForm.value});      
     }
     else{
-      this._profileService.createStock({userId: this._globalService.userId, ...this.thingForm.value});
+      this._profileService.createStock({userId: sessionStorage.getItem("userId"), ...this.thingForm.value});
       this.existStock = true  
     }    
 

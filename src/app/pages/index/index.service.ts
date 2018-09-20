@@ -8,11 +8,12 @@ import { GlobalService } from '../../shared/services/global.service';
 @Injectable()
 export class IndexService {
 
-  constructor(private _httpClient: HttpClient, private _globalService: GlobalService) {
+  constructor(private _httpClient: HttpClient, private globalService: GlobalService) {
   }
 
   getThingData(): Observable<any> {    
+    var httpOptions = this.globalService.getHttpOptions(sessionStorage.getItem("username"), sessionStorage.getItem("password"));
     return this._httpClient
-      .get(`${this._globalService.url}/thing/${this._globalService.userId}`, this._globalService.httpOptions);
+      .get(`${this.globalService.url}/thing/${sessionStorage.getItem("userId")}`, httpOptions);
   }
 }
