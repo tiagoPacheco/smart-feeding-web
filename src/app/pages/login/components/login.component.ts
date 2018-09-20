@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   constructor(private globalService: GlobalService, private router: Router) {
-    localStorage.removeItem("userId");
-    localStorage.removeItem("password");
-    localStorage.removeItem("username");
+    sessionStorage.removeItem("userId");
+    sessionStorage.removeItem("password");
+    sessionStorage.removeItem("username");
   }
 
   ngOnInit() {
@@ -25,17 +25,23 @@ export class LoginComponent implements OnInit {
         var password = data["password"];
 
         if (id) {
-          localStorage.setItem("userId", id);
-          localStorage.setItem("password", f.value.password);
-          localStorage.setItem("username", f.value.username);
+          sessionStorage.setItem("userId", id);
+          sessionStorage.setItem("password", f.value.password);
+          sessionStorage.setItem("username", f.value.username);
+          this.globalService.defaultUserId = id;
+          this.globalService.defaultPassword = f.value.password;
+          this.globalService.dafaultUsername = f.value.username;
           this.router.navigate(['/admin/dashboard'])
         }
         else {
           this.globalService.createUser({ name: f.value.username, password: f.value.password })
             .subscribe(dataUser => {
-              localStorage.setItem("userId", dataUser["id"]);
-              localStorage.setItem("password", f.value.password);
-              localStorage.setItem("username", f.value.username);
+              sessionStorage.setItem("userId", dataUser["id"]);
+              sessionStorage.setItem("password", f.value.password);
+              sessionStorage.setItem("username", f.value.username);
+              this.globalService.defaultUserId = dataUser["id"];
+              this.globalService.defaultPassword = f.value.password;
+              this.globalService.dafaultUsername = f.value.username;
               this.router.navigate(['/admin/dashboard'])
             })
         }

@@ -9,14 +9,16 @@ import { NotificationModel } from '../models/notification-model'; */
 @Injectable()
 export class GlobalService {
     url = 'http://localhost:3001';
-    userId = localStorage.getItem("userId");
-    password = localStorage.getItem("password");
-    username = localStorage.getItem("username");
+    defaultUserId = ''
+    defaultPassword = ''
+    dafaultUsername = ''
+    userId = sessionStorage.getItem("userId") ? sessionStorage.getItem("userId") : this.defaultUserId;
+    password = sessionStorage.getItem("password") ? sessionStorage.getItem("password") : this.defaultPassword;
+    username = sessionStorage.getItem("username") ? sessionStorage.getItem("username") : this.dafaultUsername;
     name = '';
     petId = '';
     thingId = '';    
     breed = '';
-
     httpOptions = {};
 
     constructor(private httpClient: HttpClient) {
