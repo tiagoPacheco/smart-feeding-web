@@ -18,19 +18,19 @@ export class PagesTopComponent {
 
   constructor(private _profileService: ProfileService,
     private globalService: GlobalService) {
-    if (this.globalService.userId) {      
-      this._profileService.getPetProfile().subscribe(
-        data => {
-          if (data[0]) {
-            this.globalService.petId = data[0]._id;
-            this.globalService.name = data[0].name;
-            this.globalService.breed = data[0].breed;
-            this.userName = globalService.name;
-            this.breed = globalService.breed;
-          }
+
+    this._profileService.getPetProfile().subscribe(
+      data => {
+        if (data[0]) {
+          this.globalService.petId = data[0]._id;
+          this.globalService.name = data[0].name;
+          this.globalService.breed = data[0].breed;
+          this.userName = globalService.name;
+          this.breed = globalService.breed;
         }
-      );
-    }
+      }
+    );
+
   }
 
   public _sidebarToggle() {
